@@ -16,8 +16,8 @@ namespace CovidTelegramBot.BotCommands
         public bool Contains(Message message)
         {
             return message.Type == MessageType.Text
-                ? message.Text.Contains(Name)
-                : false;
+                 ? message.Text.Contains(Name)
+                 : false;
         }
 
         public async Task ExecuteCommand(Message message, ITelegramBotClient telegramBotClient)

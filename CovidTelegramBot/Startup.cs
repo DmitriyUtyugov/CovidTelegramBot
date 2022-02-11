@@ -1,6 +1,7 @@
 using CovidTelegramBot.BotCommands;
 using CovidTelegramBot.BotCommands.Interfaces;
 using CovidTelegramBot.Infrastructure;
+using CovidTelegramBot.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -24,14 +25,16 @@ namespace CovidTelegramBot
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<ITelegramCommandService, CommandProviderService>()
-                .AddTelegramBotClient(Configuration)
-                .AddControllers()
-                .AddNewtonsoftJson(options =>
-                {
-                    options.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
-                    options.SerializerSettings.ContractResolver = new DefaultContractResolver();
-                });
+            services.AddControllers()
+                    .AddNewtonsoftJson(options =>
+                    {
+                        options.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
+                        options.SerializerSettings.ContractResolver = new DefaultContractResolver();
+                    });
+
+            services.AddScoped<ITelegramCommandService, CommandProviderService>();
+            services.AddTransient<IRepository, LocalRepository>();
+            services.AddTelegramBotClient(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
