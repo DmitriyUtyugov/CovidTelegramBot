@@ -1,4 +1,7 @@
 ﻿using CovidTelegramBot.BotCommands.Interfaces;
+using CovidTelegramBot.Infrastructure;
+using CovidTelegramBot.Infrastructure.Interfaces;
+using CovidTelegramBot.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +18,7 @@ namespace CovidTelegramBot.BotCommands
         {
             telegramCommands = new List<ITelegramCommand>
             {
-                new StartTelegramCommand()
+                new StartTelegramCommand(new FileDownloader(), new LocalRepository())
             };
         }
 

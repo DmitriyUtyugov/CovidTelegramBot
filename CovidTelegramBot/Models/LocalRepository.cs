@@ -7,7 +7,7 @@ namespace CovidTelegramBot.Models
 {
     public class LocalRepository : IRepository
     {
-        private List<CovidStatistic> statistics;
+        private List<CovidStatistic> statistics = new List<CovidStatistic>();
 
         public IEnumerable<CovidStatistic> CovidStatistics => statistics;
 

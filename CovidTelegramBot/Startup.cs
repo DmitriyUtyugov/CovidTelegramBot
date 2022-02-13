@@ -1,6 +1,7 @@
 using CovidTelegramBot.BotCommands;
 using CovidTelegramBot.BotCommands.Interfaces;
 using CovidTelegramBot.Infrastructure;
+using CovidTelegramBot.Infrastructure.Interfaces;
 using CovidTelegramBot.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -33,7 +34,8 @@ namespace CovidTelegramBot
                     });
 
             services.AddScoped<ITelegramCommandService, CommandProviderService>();
-            services.AddTransient<IRepository, LocalRepository>();
+            services.AddSingleton<IRepository, LocalRepository>();
+            services.AddTransient<IFileDownloader, FileDownloader>();
             services.AddTelegramBotClient(Configuration);
         }
 
