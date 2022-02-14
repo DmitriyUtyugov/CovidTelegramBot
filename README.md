@@ -26,5 +26,5 @@ Data set is licensed under the Creative Commons Attribution 4.0 International (C
 </p>
 
 ## TODO
-- [x] Find and use more smart CSV parser  
-- [x] Add possibility to get stats for other regions  
+- [x] <s>Find and use more smart CSV parser</s>
+- [x] <s>Add possibility to get stats for other regions</s> 
