@@ -12,13 +12,17 @@ namespace CovidTelegramBot.BotCommands
     public class CommandProviderService : ITelegramCommandService
     {
         private IEnumerable<ITelegramCommand> telegramCommands;
+        private IFileDownloader fileDownloader;
+        private IRepository repository;
 
         // add commands to ctor when extending telegram command pull
-        public CommandProviderService()
+        public CommandProviderService(IFileDownloader fileDownloader, IRepository repository)
         {
+            this.fileDownloader = fileDownloader;
+            this.repository = repository;
             telegramCommands = new List<ITelegramCommand>
             {
-                new StartTelegramCommand(new FileDownloader(), new LocalRepository())
+                new StartTelegramCommand(fileDownloader, repository)
             };
         }
 
