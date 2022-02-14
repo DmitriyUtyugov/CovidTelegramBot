@@ -1,5 +1,6 @@
 <h1 align="center">Covid19 stats bot for Telegram</h1>
-<p>At the moment works only for "Пермский край" which is "Perm Krai"</p>
+<p><s>At the moment works only for "Пермский край" which is "Perm Krai"</s></p>
+<p>Now works with any region except USA regions</p>
 <p>All of the stats from CSV file are stored localy</p>
 
 ## External Data usage
@@ -17,7 +18,7 @@ Data set is licensed under the Creative Commons Attribution 4.0 International (C
 ## Examples 
 <li>CSV file with statistisc exists</li>
 <p align="left">
-<img src="https://github.com/DmitriyUtyugov/CovidTelegramBot/blob/main/correctResult.gif">
+<img src="https://github.com/DmitriyUtyugov/CovidTelegramBot/blob/main/correctResultAnyRegion.gif">
 </p>
 <li>CSV file with fresh statistics was not published yet</li>
 <p align="left">
@@ -26,4 +27,4 @@ Data set is licensed under the Creative Commons Attribution 4.0 International (C
 
 ## TODO
 - [x] Find and use more smart CSV parser  
-- [ ] Add possibility to get stats for other regions  
+- [x] Add possibility to get stats for other regions  
