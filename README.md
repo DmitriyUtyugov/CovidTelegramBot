@@ -18,11 +18,11 @@ Data set is licensed under the Creative Commons Attribution 4.0 International (C
 ## Examples 
 <li>CSV file with statistisc exists</li>
 <p align="left">
-<img src="https://github.com/DmitriyUtyugov/CovidTelegramBot/blob/main/correctResultAnyRegion.gif">
+<img src="https://github.com/DmitriyUtyugov/CovidTelegramBot/blob/main/Images/correctResultAnyRegion.gif">
 </p>
 <li>CSV file with fresh statistics was not published yet</li>
 <p align="left">
-<img src="https://github.com/DmitriyUtyugov/CovidTelegramBot/blob/main/noFreshData.gif">
+<img src="https://github.com/DmitriyUtyugov/CovidTelegramBot/blob/main/Images/noFreshData.gif">
 </p>
 
 ## TODO
