@@ -42,18 +42,19 @@ namespace CovidTelegramBot.BotCommands
                 repository.ClearStatistics();
                 fileDownloader.GetFileFromUrl(statsForToday);
                 ParseCsv($"{today}.csv");
-                string messageToSend = repository.CovidStatistics
-                    .FirstOrDefault(s => s.State
-                    .Contains(message.Text.Substring(7), 
-                              StringComparison.InvariantCultureIgnoreCase)).ToString();
+
+                var statsForRegion = GetRegionStatsFromMessage(message);
+                string messageToSend = statsForRegion == null 
+                                     ? "No matching regions found..."
+                                     : statsForRegion.ToString();
 
                 await telegramBotClient.SendTextMessageAsync(chatId: message.Chat.Id,
-                                                         text: messageToSend);
+                                                             text: messageToSend);
             }
             else
             {
                 await telegramBotClient.SendTextMessageAsync(chatId: message.Chat.Id,
-                                                         text: "No fresh stats yet...");
+                                                             text: "No fresh stats yet...");
             }
         }
 
@@ -78,6 +79,13 @@ namespace CovidTelegramBot.BotCommands
                     Deaths = csv.GetInt32(deaths)
                 });
             }
+        }
+
+        private CovidStatistic GetRegionStatsFromMessage(Message message)
+        {
+            return repository.CovidStatistics
+                .FirstOrDefault(s => s.State.Contains(message.Text.Substring(7),
+                                                      StringComparison.InvariantCultureIgnoreCase));
         }
     }
 }
