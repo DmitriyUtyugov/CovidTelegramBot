@@ -8,6 +8,8 @@ using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using System.Linq;
+using System.Collections.Generic;
+using CovidTelegramBot.Infrastructure;
 
 namespace CovidTelegramBot.BotCommands
 {
@@ -41,7 +43,10 @@ namespace CovidTelegramBot.BotCommands
             {
                 repository.ClearStatistics();
                 fileDownloader.GetFileFromUrl(statsForToday);
-                ParseCsv($"{today}.csv");
+
+                List<CovidStatistic> parsedStatistics = CsvParser.ParseCsv($"{today}.csv").ToList();
+                foreach (var statistic in parsedStatistics)
+                    repository.AddStatistic(statistic);
 
                 var statsForRegion = GetRegionStatsFromMessage(message);
                 string messageToSend = statsForRegion == null 
@@ -55,29 +60,6 @@ namespace CovidTelegramBot.BotCommands
             {
                 await telegramBotClient.SendTextMessageAsync(chatId: message.Chat.Id,
                                                              text: "No fresh stats yet...");
-            }
-        }
-
-        private void ParseCsv(string fileName)
-        {
-            using var csv = CsvDataReader.Create(fileName);
-
-            var state = csv.GetOrdinal("Province_State");
-            var country = csv.GetOrdinal("Country_Region");
-            var lastUpdate = csv.GetOrdinal("Last_Update");
-            var confirmedCases = csv.GetOrdinal("Confirmed");
-            var deaths = csv.GetOrdinal("Deaths");
-
-            while (csv.Read())
-            {
-                repository.AddStatistic(new CovidStatistic
-                {
-                    State = csv.GetString(state),
-                    Country = csv.GetString(country),
-                    LastUpdate = csv.GetString(lastUpdate),
-                    ConfirmedCases = csv.GetInt32(confirmedCases),
-                    Deaths = csv.GetInt32(deaths)
-                });
             }
         }
 
